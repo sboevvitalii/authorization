@@ -4,17 +4,7 @@ import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { useId } from "react";
 
-export function AuthFormField({
-  login,
-  password,
-  onChangeLogin,
-  onChangePassword,
-}: {
-  login: string;
-  password: string;
-  onChangeLogin: (login: string) => void;
-  onChangePassword: (password: string) => void;
-}) {
+export function AuthFormField() {
   const loginId = useId();
   const passwordId = useId();
   return (
@@ -24,9 +14,8 @@ export function AuthFormField({
         <Input
           id={loginId}
           type="login"
+          name="login"
           placeholder="введите свой email"
-          value={login}
-          onChange={(e) => onChangeLogin(e.target.value)}
           required
         />
       </div>
@@ -35,9 +24,8 @@ export function AuthFormField({
         <Input
           id={passwordId}
           type="password"
+          name="password"
           placeholder="введите свой пароль"
-          value={password}
-          onChange={(e) => onChangePassword(e.target.value)}
           required
         />
       </div>
