@@ -1,10 +1,14 @@
-import { GameList } from "@/features/game-list/server";
+import { Game } from "@/features/game/server";
 
-export default function Home() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
-    <div className=" flex flex-col gap-8 container mx-auto pt-[100px]">
-      <h1 className="text-4xl font-bold">Игры</h1>
-      <GameList />
-    </div>
+    <main className="flex flex-col grow pt-24 container mx-auto">
+      <Game gameId={id} />
+    </main>
   );
 }

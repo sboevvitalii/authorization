@@ -46,6 +46,7 @@ function dbGameToGameEntity(
         id: game.id,
         creator: creator,
         status: game.status,
+        field: game.field,
       } satisfies GameIdleEntity;
     }
     case "inProgres":
