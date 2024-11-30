@@ -1,10 +1,14 @@
-import { Alert, AlertDescription } from "@/shared/ui/alert";
-import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { useId } from "react";
 
-export function AuthFormField() {
+export function AuthFormField({
+  errors,
+  formData,
+}: {
+  formData?: FormData;
+  errors?: { login?: string; password?: string };
+}) {
   const loginId = useId();
   const passwordId = useId();
   return (
@@ -17,7 +21,9 @@ export function AuthFormField() {
           name="login"
           placeholder="введите свой email"
           required
+          defaultValue={formData?.get("login")?.toString()}
         />
+        {errors?.login && <div>{errors.login}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor={passwordId}>Пароль</Label>
@@ -27,7 +33,9 @@ export function AuthFormField() {
           name="password"
           placeholder="введите свой пароль"
           required
+          defaultValue={formData?.get("password")?.toString()}
         />
+        {errors?.password && <div>{errors.password}</div>}
       </div>
     </>
   );

@@ -3,16 +3,15 @@
 import { AuthFormLayout } from "../ui/auth-form-layout";
 import { AuthFormField } from "../ui/fields";
 import { ButtonSubmit } from "../ui/button-submit";
-import { right } from "@/shared/lib/either";
 import { AuthFormLink } from "../ui/link";
 import { ErrorAuthForm } from "../ui/error-auth-form";
 import { useActionState } from "@/shared/lib/react-CRUTCH";
-import { signUpAction } from "../action/sign-up";
+import { signUpAction, SignUpFormState } from "../action/sign-up";
 
 export function SignUpForm() {
   const [formState, action, isPanding] = useActionState(
     signUpAction,
-    right(undefined)
+    {} as SignUpFormState
   );
 
   return (
@@ -20,11 +19,11 @@ export function SignUpForm() {
       title="Зарегистрироваться"
       description="Пройдите регистрицию своего аккаунта"
       action={action}
-      fields={<AuthFormField />}
+      fields={<AuthFormField {...formState} />}
       actions={
         <ButtonSubmit isPending={isPanding}>Зарегистрироваться</ButtonSubmit>
       }
-      error={<ErrorAuthForm error={formState} />}
+      error={<ErrorAuthForm error={formState.errors?._errors} />}
       link={
         <AuthFormLink
           text="У вас уже есть аккаунт?"
