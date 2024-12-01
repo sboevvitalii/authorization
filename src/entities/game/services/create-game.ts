@@ -1,6 +1,6 @@
 import { left, right } from "@/shared/lib/either";
 import { PlayerEntity } from "../domain";
-import { gameRepository } from "../repositories/gameRepository";
+import { gameRepository } from "../repositories/game-repository";
 
 export async function createGame(player: PlayerEntity) {
   const playerGames = await gameRepository.gameList({
@@ -19,6 +19,7 @@ export async function createGame(player: PlayerEntity) {
     id: String(Math.random()),
     creator: player,
     status: "idle",
+    field: Array(9).fill(null),
   });
 
   return right(createdGame);

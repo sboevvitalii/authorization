@@ -11,12 +11,25 @@ async function gameList(where?: GameWhereInput): Promise<GameEntity[]> {
   return games.map(dbGameToGameEntity);
 }
 
+async function getGame(where?: GameWhereInput) {
+  const game = await game.findFirst({
+    include: {
+      winner: true,
+      players: true,
+    },
+  });
+  if (game) {
+    return dbGameToGameEntity(game);
+  }
+  return undefined;
+}
+
 async function createGame(game: GameIdleEntity): Promise<GameEntity> {
   const createdGame = await game.create({
     data: {
       status: game.status,
       id: game.id,
-      field: Array(9).fill(null),
+      field: game.field,
       players: {
         connect: { id: game.creator.id },
       },
@@ -73,4 +86,4 @@ function dbGameToGameEntity(
   }
 }
 
-export const gameRepository = { gameList, createGame };
+export const gameRepository = { gameList, createGame, getGame };

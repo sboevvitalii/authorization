@@ -1,2 +1,3 @@
-export { createGame } from "./services/createGame";
-export { getIdleGames } from "./services/getIdleGames";
+export { getGameDyId } from "./services/get-game";
+export { createGame } from "./services/create-game";
+export { getIdleGames } from "./services/get-id-games";
