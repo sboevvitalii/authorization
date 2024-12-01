@@ -7,6 +7,7 @@ import { AuthFormLink } from "../ui/link";
 import { ErrorAuthForm } from "../ui/error-auth-form";
 import { useActionState } from "@/shared/lib/react-CRUTCH";
 import { signUpAction, SignUpFormState } from "../action/sign-up";
+import { routes } from "@/kernel/routes";
 
 export function SignUpForm() {
   const [formState, action, isPanding] = useActionState(
@@ -28,7 +29,7 @@ export function SignUpForm() {
         <AuthFormLink
           text="У вас уже есть аккаунт?"
           linkText="Войти"
-          url="/sign-in"
+          url={routes.signIn()}
         />
       }
     />
